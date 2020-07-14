@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <script>
+      
+    function vraag(vraag)
+        {
+           
+            let antwoord = document.getElementById("input-vraag"+vraag).value; // dit is de input
+           
+                     // let woonplaats = document.getElementById("input-woonplaats").value;
+            // let kan van waarde veranderen
+            // const blijft constant
+            // var kan ook
+            document.getElementById("antwoord"+vraag).innerHTML = antwoord; // dit zijn de antwoorden
+          
+        }
+    
+        function Bereken(){
+
+           
+            var aantalgoed = 0;
+            var antwoordarray = [ "Body", "Body", "Head", "Hoi", "Aapie"];
+            var i;
+            for (i=1; i<5; i++) // vijf vragen
+            {
+                var input = "input-vraag"+i;
+                var checkantwoord = "antwoord"+i;
+              if (i == 3)
+              { continue; }
+                 if (document.getElementById(input).value == antwoordarray[i])
+                {
+                    document.getElementById(checkantwoord).innerHTML == "GOED";
+                    alert("goed");
+                    aantalgoed++;
+                }
+                else
+                {
+                    document.getElementById(checkantwoord).innerHTML == "FOUT";
+                    alert("fout");
+                }
+                
+            }
+         
+        //     if (antwoord1 == "Body")
+        //    {
+        //     document.getElementById("antwoord1").innerHTML = "GOED"; 
+        //     aantalgoed++;
+        //    }
+        //    else
+        //    {
+        //     document.getElementById("antwoord1").innerHTML = "FOUT"; 
+        //    }
+        //    if (antwoord2 == "head")
+        //    {
+        //     document.getElementById("antwoord2").innerHTML = "GOED"; 
+        //    }
+        //    if (document.getElementById("input-vraag3a").checked == true && document.getElementById("input-vraag3b").checked == true  && document.getElementById("input-vraag3c").checked == false) 
+        //    {
+        //     alert("Je hebt het goed beantwoord! lllert");
+        //    }
+        //    if (antwoord5 == "</html>")
+        //    {
+        //     alert("Je hebt het goed beantwoord!");
+        //    }
+
+        }
+    
+    </script>
+</head>
+<body>
+    <form>
+<h2>Vraag 1:“ Waar komt de hoofd content van een pagina?”</h2>
+<select id="input-vraag1" onchange="vraag(1)">
+    <option>Maak een keuze</option>
+    <option value="Head">Head</option>
+    <option value="Style">Style</option>
+    <option value="Body">Body</option>
+</select>
+<p id="antwoord1"></p>
+<h2>Vraag 2: Vul de ontbrekende code in</h2>
+<h3>In de </h3><input type="text" id="input-vraag2" onchange="vraag(2)">  <h3>tag plaats ik informatie over de pagina zoals een titel.</h3>
+<p id="antwoord2"></p>
+<h2>Vraag 3: Met welke twee tags maak ik tekst dik</h2>
+<input type="checkbox" id="input-vraag3a" value="Strong" name="vraag3" onchange="vraag('3a')"></input>
+<label for="input-vraag3a">Strong</label><br>
+<input type="checkbox" id="input-vraag3b" value="B" name="vraag3" onchange="vraag('3b')"></input>
+<label for="input-vraag3b">B</label><br>
+<input type="checkbox" id="input-vraag3c" value="EM" name="vraag3" onchange="vraag('3c')"></input>
+<label for="input-vraag3c">EM</label><br>
+<p id="antwoord3a"></p><p id="antwoord3b"></p><p id="antwoord3c"></p>
+<h2>Vraag 4:“ Met welke css-tag maak je een achtergrond doorzichtig/ondoorzichtig?”</h2>
+<select id="input-vraag4" onchange="vraag(4)">
+    <option>Maak een keuze</option>
+    <option value="Opacity">Opacity</option>
+    <option value="Background-color">Background-color</option>
+    <option value="See thru">See thru</option>
+</select>
+<p id="antwoord4"></p>
+<h2>Vraag 5: Welke tag staat helemaal onderaan een html-pagina (De gehele tag svp)</h2>
+<input type="text" id="input-vraag5" onchange="vraag(5)"> 
+<p id="antwoord5"></p>
+<button onclick="Bereken();"     type="button">Bereken de antwoorden</button> 
+
+</form>
+</body>
+</html>
