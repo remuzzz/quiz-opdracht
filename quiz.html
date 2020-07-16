@@ -10,13 +10,25 @@
         {
            
             let antwoord = document.getElementById("input-vraag"+vraag).value; // dit is de input
+
            
                      // let woonplaats = document.getElementById("input-woonplaats").value;
             // let kan van waarde veranderen
             // const blijft constant
             // var kan ook
             document.getElementById("antwoord"+vraag).innerHTML = antwoord; // dit zijn de antwoorden
-          
+            if (document.getElementById("input-vraag3a").checked == false)
+            {
+                document.getElementById("antwoord3a").innerHTML = "";
+            }
+            if (document.getElementById("input-vraag3b").checked == false)
+            {
+                document.getElementById("antwoord3b").innerHTML = ""; 
+            }
+            if (document.getElementById("input-vraag3c").checked == false)
+            {
+                document.getElementById("antwoord3c").innerHTML = "";  
+            }
         }
     
         function Bereken(){
