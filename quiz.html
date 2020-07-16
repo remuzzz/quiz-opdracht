@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <script>
-      
-    function vraag(vraag)
-        {
-           
-            let antwoord = document.getElementById("input-vraag"+vraag).value; // dit is de input
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-           
-                     // let woonplaats = document.getElementById("input-woonplaats").value;
-            // let kan van waarde veranderen
-            // const blijft constant
-            // var kan ook
-            document.getElementById("antwoord"+vraag).innerHTML = antwoord; // dit zijn de antwoorden
-            if (document.getElementById("input-vraag3a").checked == false)
-            {
+    <script>
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function vraag(vraag) {
+            var antwoordarray = ["Array0", "Body", "Head", "Vraag 3", "Opacity", "</html>"];
+            let antwoord = document.getElementById("input-vraag" + vraag).value; // dit is de input
+            antwoord = capitalizeFirstLetter(antwoord);
+
+            document.getElementById("antwoord" + vraag).innerHTML = "<div class=\"ingevuld\">Je hebt ingevuld: " + antwoord + "</div>"; // dit zijn de antwoorden
+
+            if (antwoord == antwoordarray[vraag]) {
+                document.getElementById("check" + vraag).innerHTML = "<div class=\"goed\">Dat is het juiste antwoord</div>";
+            }
+            else { // antwoord niet goed, dus leegmaken
+                document.getElementById("check" + vraag).innerHTML = "";
+            }
+            // VRAAG 3 is uitzondering met checkbox
+            var checkbox = document.getElementsByClassName("vraag3");
+
+            if (checkbox[0].checked == true && checkbox[1].checked == true && checkbox[2].checked == false) {
+                document.getElementById("check3").innerHTML = "<div class=\"goed\">Dat is het juiste antwoord</div>";
+            }
+            else document.getElementById("check3").innerHTML = ""; // leegmaken
+
+
+            if (document.getElementById("input-vraag3a").checked == false) { // display bij lege checkbox weer leegmaken
                 document.getElementById("antwoord3a").innerHTML = "";
             }
-            if (document.getElementById("input-vraag3b").checked == false)
-            {
-                document.getElementById("antwoord3b").innerHTML = ""; 
+            if (document.getElementById("input-vraag3b").checked == false) {
+                document.getElementById("antwoord3b").innerHTML = "";
             }
-            if (document.getElementById("input-vraag3c").checked == false)
-            {
-                document.getElementById("antwoord3c").innerHTML = "";  
+            if (document.getElementById("input-vraag3c").checked == false) {
+                document.getElementById("antwoord3c").innerHTML = "";
             }
         }
-    
-        function Bereken(){
 
-           
+        function Bereken() {
+
+
             var aantalgoed = 0;
             var antwoordarray = ["Array0", "Body", "Head", "Vraag 3", "Opacity", "</html>"];
             var i;
@@ -42,72 +56,87 @@
                 var input = "input-vraag" + i;
                 var checkantwoord = "antwoord" + i;
                 if (i == 3) {
-                    var test = document.getElementsByClassName("vraag3");
-                    alert(test[0].checked);
+                    var checkbox = document.getElementsByClassName("vraag3");
 
                     var antwoord = document.forms['quiz'].elements['vraag3[]'];
-                    if (test[0].checked == true && test[1].checked == true && test[2].checked == false) {
-                        document.getElementById("antwoord3").innerHTML == "GOED";
-                        alert("Vraag 3 = goed");
+                    if (checkbox[0].checked == true && checkbox[1].checked == true && checkbox[2].checked == false) {
                         aantalgoed++;
-                    }
-                    else {
-                        alert("Vraag 3 = fout");
                     }
                     continue;
                 }
-                if (document.getElementById(input).value == antwoordarray[i]) {
-                    document.getElementById(checkantwoord).innerHTML == "GOED";
-                    alert(checkantwoord + "goed");
+
+                if (capitalizeFirstLetter(document.getElementById(input).value) == antwoordarray[i]) {
+
                     aantalgoed++;
                 }
-                else {
-                    document.getElementById(checkantwoord).innerHTML == "FOUT";
-                    // alert(checkantwoord + "fout");
-                }
-               
+
+
             }
-            alert ("Je hebt " + aantalgoed + " vragen goed beantwoord. Dat is "+ (aantalgoed / 5 *100) + " procent");
-    s
+            alert("Je hebt " + aantalgoed + " vragen goed beantwoord. Dat is " + (aantalgoed / 5 * 100) + " procent");
 
         }
-    
+
     </script>
 </head>
+
 <body>
     <form name="quiz">
-<h2>Vraag 1:“ Waar komt de hoofd content van een pagina?”</h2>
-<select id="input-vraag1" onchange="vraag(1)">
-    <option>Maak een keuze</option>
-    <option value="Head">Head</option>
-    <option value="Style">Style</option>
-    <option value="Body">Body</option>
-</select>
-<p id="antwoord1"></p>
-<h2>Vraag 2: Vul de ontbrekende code in</h2>
-<h3>In de </h3><input type="text" id="input-vraag2" onchange="vraag(2)">  <h3>tag plaats ik informatie over de pagina zoals een titel.</h3>
-<p id="antwoord2"></p>
-<h2>Vraag 3: Met welke twee tags maak ik tekst dik</h2>
-<input type="checkbox" id="input-vraag3a" value="Strong" class="vraag3" onchange="vraag('3a')"></input>
-<label for="input-vraag3a">Strong</label><br>
-<input type="checkbox" id="input-vraag3b" value="B" class="vraag3" onchange="vraag('3b')"></input>
-<label for="input-vraag3b">B</label><br>
-<input type="checkbox" id="input-vraag3c" value="EM" class="vraag3" onchange="vraag('3c')"></input>
-<label for="input-vraag3c">EM</label><br>
-<p id="antwoord3a"></p><p id="antwoord3b"></p><p id="antwoord3c"></p><p id="antwoord3"></p>
-<h2>Vraag 4:“ Met welke css-tag maak je een achtergrond doorzichtig/ondoorzichtig?”</h2>
-<select id="input-vraag4" onchange="vraag(4)">
-    <option>Maak een keuze</option>
-    <option value="Opacity">Opacity</option>
-    <option value="Background-color">Background-color</option>
-    <option value="See thru">See thru</option>
-</select>
-<p id="antwoord4"></p>
-<h2>Vraag 5: Welke tag staat helemaal onderaan een html-pagina (De gehele tag svp)</h2>
-<input type="text" id="input-vraag5" onchange="vraag(5)"> 
-<p id="antwoord5"></p>
-<button onclick="Bereken();"     type="button">Bereken de antwoorden</button> 
-
-</form>
+        <h1>Remy's html-quiz</h1>
+        <div class="vraag">
+            <h2>Vraag 1: Waar komt de hoofd content van een pagina?</h2>
+            <select id="input-vraag1" onchange="vraag(1)">
+                <option>Maak een keuze</option>
+                <option value="Head">Head</option>
+                <option value="Style">Style</option>
+                <option value="Body">Body</option>
+            </select>
+            <p id="antwoord1"></p>
+            <div id="check1"></div>
+        </div>
+        <div class="vraag">
+            <h2>Vraag 2: Vul de ontbrekende code in:</h2>
+            <span>In de </span><input type="text" id="input-vraag2" onchange="vraag(2)">
+            <span>tag plaats ik informatie over de pagina zoals een titel.</span>
+            <p id="antwoord2"></p>
+            <div id="check2"></div>
+        </div>
+        <div class="vraag">
+                <h2>Vraag 3: Met welke twee tags maak ik tekst dik?</h2>
+                <input type="checkbox" id="input-vraag3a" value="Strong" class="vraag3" onchange="vraag('3a')"></input>
+                <label for="input-vraag3a">Strong</label><br>
+                <input type="checkbox" id="input-vraag3b" value="B" class="vraag3" onchange="vraag('3b')"></input>
+                <label for="input-vraag3b">B</label><br>
+                <input type="checkbox" id="input-vraag3c" value="EM" class="vraag3" onchange="vraag('3c')"></input>
+                <label for="input-vraag3c">EM</label><br>
+                <p id="antwoord3a"></p>
+                <div id="check3a"></div>
+                <p id="antwoord3b"></p>
+                <div id="check3b"></div>
+                <p id="antwoord3c"></p>
+                <div id="check3c"></div>
+                <p id="antwoord3"></p>
+                <div id="check3"></div>
+            </div>
+            <div class="vraag">
+                <h2>Vraag 4: Met welke css-tag maak je een achtergrond doorzichtig/ondoorzichtig?</h2>
+                <select id="input-vraag4" onchange="vraag(4)">
+                    <option>Maak een keuze</option>
+                    <option value="Opacity">Opacity</option>
+                    <option value="Background-color">Background-color</option>
+                    <option value="See thru">See thru</option>
+                </select>
+                <p id="antwoord4"></p>
+                <div id="check4"></div>
+            </div>
+            <div class="vraag">
+            <h2>Vraag 5: Welke tag staat helemaal onderaan een html-pagina? (De gehele tag svp)</h2>
+            <input type="text" id="input-vraag5" onchange="vraag(5)">
+            <p id="antwoord5"></p>
+            <div id="check5"></div>
+        </div>
+            <button onclick="Bereken();" type="button">Bereken mijn eindscore</button>
+    
+    </form>
 </body>
+
 </html>
