@@ -23,27 +23,39 @@
 
            
             var aantalgoed = 0;
-            var antwoordarray = [ "Body", "Body", "Head", "Hoi", "Aapie"];
+            var antwoordarray = ["Array0", "Body", "Head", "Vraag 3", "Opacity", "</html>"];
             var i;
-            for (i=1; i<5; i++) // vijf vragen
+            for (i = 1; i < 6; i++) // vijf vragen
             {
-                var input = "input-vraag"+i;
-                var checkantwoord = "antwoord"+i;
-              if (i == 3)
-              { continue; }
-                 if (document.getElementById(input).value == antwoordarray[i])
-                {
+                var input = "input-vraag" + i;
+                var checkantwoord = "antwoord" + i;
+                if (i == 3) {
+                    var test = document.getElementsByClassName("vraag3");
+                    alert(test[0].checked);
+
+                    var antwoord = document.forms['quiz'].elements['vraag3[]'];
+                    if (test[0].checked == true && test[1].checked == true && test[2].checked == false) {
+                        document.getElementById("antwoord3").innerHTML == "GOED";
+                        alert("Vraag 3 = goed");
+                        aantalgoed++;
+                    }
+                    else {
+                        alert("Vraag 3 = fout");
+                    }
+                    continue;
+                }
+                if (document.getElementById(input).value == antwoordarray[i]) {
                     document.getElementById(checkantwoord).innerHTML == "GOED";
-                    alert("goed");
+                    alert(checkantwoord + "goed");
                     aantalgoed++;
                 }
-                else
-                {
+                else {
                     document.getElementById(checkantwoord).innerHTML == "FOUT";
-                    alert("fout");
+                    // alert(checkantwoord + "fout");
                 }
-                
+               
             }
+            alert ("Je hebt " + aantalgoed + " vragen goed beantwoord. Dat is "+ (aantalgoed / 5 *100) + " procent");
          
         //     if (antwoord1 == "Body")
         //    {
@@ -72,7 +84,7 @@
     </script>
 </head>
 <body>
-    <form>
+    <form name="quiz">
 <h2>Vraag 1:“ Waar komt de hoofd content van een pagina?”</h2>
 <select id="input-vraag1" onchange="vraag(1)">
     <option>Maak een keuze</option>
@@ -85,13 +97,13 @@
 <h3>In de </h3><input type="text" id="input-vraag2" onchange="vraag(2)">  <h3>tag plaats ik informatie over de pagina zoals een titel.</h3>
 <p id="antwoord2"></p>
 <h2>Vraag 3: Met welke twee tags maak ik tekst dik</h2>
-<input type="checkbox" id="input-vraag3a" value="Strong" name="vraag3" onchange="vraag('3a')"></input>
+<input type="checkbox" id="input-vraag3a" value="Strong" class="vraag3" onchange="vraag('3a')"></input>
 <label for="input-vraag3a">Strong</label><br>
-<input type="checkbox" id="input-vraag3b" value="B" name="vraag3" onchange="vraag('3b')"></input>
+<input type="checkbox" id="input-vraag3b" value="B" class="vraag3" onchange="vraag('3b')"></input>
 <label for="input-vraag3b">B</label><br>
-<input type="checkbox" id="input-vraag3c" value="EM" name="vraag3" onchange="vraag('3c')"></input>
+<input type="checkbox" id="input-vraag3c" value="EM" class="vraag3" onchange="vraag('3c')"></input>
 <label for="input-vraag3c">EM</label><br>
-<p id="antwoord3a"></p><p id="antwoord3b"></p><p id="antwoord3c"></p>
+<p id="antwoord3a"></p><p id="antwoord3b"></p><p id="antwoord3c"></p><p id="antwoord3"></p>
 <h2>Vraag 4:“ Met welke css-tag maak je een achtergrond doorzichtig/ondoorzichtig?”</h2>
 <select id="input-vraag4" onchange="vraag(4)">
     <option>Maak een keuze</option>
